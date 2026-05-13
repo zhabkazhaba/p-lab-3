@@ -8,348 +8,348 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetests}{tests}}\ \{}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a2e02d7b0c51fb1e89e930e30d365d535}{Runs}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
-\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ S,\ k;}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ pi,\ V,\ erfc\_arg,\ p\_value;}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ S\ =\ 0;}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ k=0;\ k<n;\ k++\ )}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ((sample[k/32]\ >>\ (k\%32))\ \&\ 1)\ )}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ S++;}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ pi\ =\ (double)S\ /\ (\textcolor{keywordtype}{double})n;}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ std::fabs(pi\ -\/\ 0.5)\ >\ (2.0\ /\ std::sqrt(n))\ )\ \{}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tRUNS\ TEST\(\backslash\)n"{}});}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tPI\ ESTIMATOR\ CRITERIA\ NOT\ MET!\ PI\ =\ \%f\(\backslash\)n"{}},\ pi);}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ p\_value\ =\ 0.0;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}FAILURE\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value);}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ V\ =\ 1;}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ k=1;\ k<n;\ k++\ )\ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ current\_bit\ =\ (sample[k/32]\ >>\ (k\%32))\ \&\ 1;}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ prev\_bit\ =\ (sample[(k-\/1)/32]\ >>\ ((k-\/1)\%32))\ \&\ 1;}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ current\_bit\ !=\ prev\_bit\ )}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ V++;}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ erfc\_arg\ =\ std::fabs(V\ -\/\ 2.0\ *\ n\ *\ pi\ *\ (1.0\ -\/\ pi))\ /\ (2.0\ *\ pi\ *\ (1.0\ -\/\ pi)\ *\ std::sqrt(2.0\ *\ n));}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ p\_value\ =\ std::erfc(erfc\_arg);}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tRUNS\ TEST\(\backslash\)n"{}});}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ Pi\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ pi);}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ V\_n\_obs\ (Total\ \#\ of\ runs)\ =\ \%d\(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})V);}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(c)\ V\_n\_obs\ -\/\ 2\ n\ pi\ (1-\/pi)\(\backslash\)n"{}});}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ =\ \%f\(\backslash\)n"{}},\ erfc\_arg);}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ 2\ sqrt(2n)\ pi\ (1-\/pi)\(\backslash\)n"{}});}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ p\_value\ <\ 0.0\ ||\ p\_value\ >\ 1.0\ )}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}WARNING:\ \ P\_VALUE\ IS\ OUT\ OF\ RANGE.\(\backslash\)n"{}});}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value\ <\ ALPHA\ ?\ \textcolor{stringliteral}{"{}FAILURE"{}}\ :\ \textcolor{stringliteral}{"{}SUCCESS"{}},\ p\_value);}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00061\ \ \ \ \ \}}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_aeb013dcccbe56ea981cf819a0ff38159}{LongestRunOfOnes}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ chi2,\ pi[7];}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ run,\ v\_n\_obs,\ N,\ i,\ j,\ K,\ M,\ V[7];}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ nu[7]\ =\ \{\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0\ \};}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ n\ <\ 128\ )\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ LONGEST\ RUNS\ OF\ ONES\ TEST\(\backslash\)n"{}});}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ n=\%d\ is\ too\ short\(\backslash\)n"{}},\ n);}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ n\ <\ 6272\ )\ \{}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 3;}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 8;}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 1;\ V[1]\ =\ 2;\ V[2]\ =\ 3;\ V[3]\ =\ 4;}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.21484375;}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.3671875;}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.23046875;}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.1875;}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ n\ <\ 750000\ )\ \{}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 5;}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 128;}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 4;\ V[1]\ =\ 5;\ V[2]\ =\ 6;\ V[3]\ =\ 7;\ V[4]\ =\ 8;\ V[5]\ =\ 9;}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.1174035788;}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.242955959;}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.249363483;}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.17517706;}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ pi[4]\ =\ 0.102701071;}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ pi[5]\ =\ 0.112398847;}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 6;}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 10000;}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 10;\ V[1]\ =\ 11;\ V[2]\ =\ 12;\ V[3]\ =\ 13;\ V[4]\ =\ 14;\ V[5]\ =\ 15;\ V[6]\ =\ 16;}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.0882;}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.2092;}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.2483;}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.1933;}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ pi[4]\ =\ 0.1208;}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ pi[5]\ =\ 0.0675;}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ pi[6]\ =\ 0.0727;}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ N\ =\ n/M;}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<N;\ i++\ )\ \{}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ v\_n\_obs\ =\ 0;}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 0;}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ j=0;\ j<M;\ j++\ )\ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ i*M+j;}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ((sample[global\_idx/32]\ >>\ (global\_idx\%32))\ \&\ 1)\ ==\ 1\ )\ \{}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run++;}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ run\ >\ v\_n\_obs\ )}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v\_n\_obs\ =\ run;}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 0;}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ <\ V[0]\ )}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[0]++;}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ j=0;\ j<=K;\ j++\ )\ \{}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ ==\ V[j]\ )}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[j]++;}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ >\ V[K]\ )}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[K]++;}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ chi2\ =\ 0.0;}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<=K;\ i++\ )}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ chi2\ +=\ ((nu[i]\ -\/\ N\ *\ pi[i])\ *\ (nu[i]\ -\/\ N\ *\ pi[i]))\ /\ (N\ *\ pi[i]);}
-\DoxyCodeLine{00139\ }
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\ =\ (K\ ==\ 3)\ ?\ 11.345\ :\ ((K\ ==\ 5)\ ?\ 15.086\ :\ 16.812);}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ is\_success\ =\ (chi2\ <=\ chi2\_crit);}
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacetests}{tests}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a2e02d7b0c51fb1e89e930e30d365d535}{Runs}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ S,\ k;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ pi,\ V,\ erfc\_arg,\ p\_value;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ S\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ k=0;\ k<n;\ k++\ )}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ((sample[k/32]\ >>\ (k\%32))\ \&\ 1)\ )}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ S++;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ pi\ =\ (double)S\ /\ (\textcolor{keywordtype}{double})n;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ std::fabs(pi\ -\/\ 0.5)\ >\ (2.0\ /\ std::sqrt(n))\ )\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tRUNS\ TEST\(\backslash\)n"{}});}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tPI\ ESTIMATOR\ CRITERIA\ NOT\ MET!\ PI\ =\ \%f\(\backslash\)n"{}},\ pi);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ p\_value\ =\ 0.0;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}FAILURE\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ V\ =\ 1;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ k=1;\ k<n;\ k++\ )\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ current\_bit\ =\ (sample[k/32]\ >>\ (k\%32))\ \&\ 1;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ prev\_bit\ =\ (sample[(k-\/1)/32]\ >>\ ((k-\/1)\%32))\ \&\ 1;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ current\_bit\ !=\ prev\_bit\ )}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ V++;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ erfc\_arg\ =\ std::fabs(V\ -\/\ 2.0\ *\ n\ *\ pi\ *\ (1.0\ -\/\ pi))\ /\ (2.0\ *\ pi\ *\ (1.0\ -\/\ pi)\ *\ std::sqrt(2.0\ *\ n));}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ p\_value\ =\ std::erfc(erfc\_arg);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\(\backslash\)tRUNS\ TEST\(\backslash\)n"{}});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ Pi\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ pi);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ V\_n\_obs\ (Total\ \#\ of\ runs)\ =\ \%d\(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})V);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(c)\ V\_n\_obs\ -\/\ 2\ n\ pi\ (1-\/pi)\(\backslash\)n"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ =\ \%f\(\backslash\)n"{}},\ erfc\_arg);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ 2\ sqrt(2n)\ pi\ (1-\/pi)\(\backslash\)n"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ p\_value\ <\ 0.0\ ||\ p\_value\ >\ 1.0\ )}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}WARNING:\ \ P\_VALUE\ IS\ OUT\ OF\ RANGE.\(\backslash\)n"{}});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value\ <\ ALPHA\ ?\ \textcolor{stringliteral}{"{}FAILURE"{}}\ :\ \textcolor{stringliteral}{"{}SUCCESS"{}},\ p\_value);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_aeb013dcccbe56ea981cf819a0ff38159}{LongestRunOfOnes}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ chi2,\ pi[7];}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ run,\ v\_n\_obs,\ N,\ i,\ j,\ K,\ M,\ V[7];}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ nu[7]\ =\ \{\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0\ \};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ n\ <\ 128\ )\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ LONGEST\ RUNS\ OF\ ONES\ TEST\(\backslash\)n"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ n=\%d\ is\ too\ short\(\backslash\)n"{}},\ n);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ n\ <\ 6272\ )\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 3;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 8;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 1;\ V[1]\ =\ 2;\ V[2]\ =\ 3;\ V[3]\ =\ 4;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.21484375;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.3671875;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.23046875;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.1875;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ n\ <\ 750000\ )\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 5;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 128;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 4;\ V[1]\ =\ 5;\ V[2]\ =\ 6;\ V[3]\ =\ 7;\ V[4]\ =\ 8;\ V[5]\ =\ 9;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.1174035788;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.242955959;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.249363483;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.17517706;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ pi[4]\ =\ 0.102701071;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ pi[5]\ =\ 0.112398847;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ 6;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ M\ =\ 10000;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ V[0]\ =\ 10;\ V[1]\ =\ 11;\ V[2]\ =\ 12;\ V[3]\ =\ 13;\ V[4]\ =\ 14;\ V[5]\ =\ 15;\ V[6]\ =\ 16;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ pi[0]\ =\ 0.0882;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ pi[1]\ =\ 0.2092;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ pi[2]\ =\ 0.2483;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ pi[3]\ =\ 0.1933;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ pi[4]\ =\ 0.1208;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ pi[5]\ =\ 0.0675;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ pi[6]\ =\ 0.0727;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ N\ =\ n/M;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<N;\ i++\ )\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ v\_n\_obs\ =\ 0;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 0;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ j=0;\ j<M;\ j++\ )\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ i*M+j;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ((sample[global\_idx/32]\ >>\ (global\_idx\%32))\ \&\ 1)\ ==\ 1\ )\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run++;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ run\ >\ v\_n\_obs\ )}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v\_n\_obs\ =\ run;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ <\ V[0]\ )}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[0]++;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ j=0;\ j<=K;\ j++\ )\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ ==\ V[j]\ )}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[j]++;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ v\_n\_obs\ >\ V[K]\ )}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nu[K]++;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ chi2\ =\ 0.0;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<=K;\ i++\ )}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ chi2\ +=\ ((nu[i]\ -\/\ N\ *\ pi[i])\ *\ (nu[i]\ -\/\ N\ *\ pi[i]))\ /\ (N\ *\ pi[i]);}
 \DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ LONGEST\ RUNS\ OF\ ONES\ TEST\(\backslash\)n"{}});}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ N\ (\#\ of\ substrings)\ \ =\ \%d\(\backslash\)n"{}},\ N);}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ M\ (Substring\ Length)\ =\ \%d\(\backslash\)n"{}},\ M);}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(c)\ Chi\string^2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ chi2);}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ F\ R\ E\ Q\ U\ E\ N\ C\ Y\(\backslash\)n"{}});}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ K\ ==\ 3\ )\ \{}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ <=1\ \ \ \ \ 2\ \ \ \ \ 3\ \ \ \ >=4\ \ \ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3]);}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ K\ ==\ 5\ )\ \{}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t<=4\ \ 5\ \ 6\ \ 7\ \ 8\ \ >=9\ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3],\ nu[4],\ nu[5]);}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t<=10\ \ 11\ \ 12\ \ 13\ \ 14\ \ 15\ >=16\ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3],\ nu[4],\ nu[5],\ nu[6]);}
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00166\ }
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%s\(\backslash\)t\(\backslash\)tChi\string^2\ =\ \%f\ (Crit:\ \%f)\(\backslash\)n\(\backslash\)n"{}},\ is\_success\ ?\ \textcolor{stringliteral}{"{}SUCCESS"{}}\ :\ \textcolor{stringliteral}{"{}FAILURE"{}},\ chi2,\ chi2\_crit);}
-\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\ =\ (K\ ==\ 3)\ ?\ 11.345\ :\ ((K\ ==\ 5)\ ?\ 15.086\ :\ 16.812);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ is\_success\ =\ (chi2\ <=\ chi2\_crit);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ LONGEST\ RUNS\ OF\ ONES\ TEST\(\backslash\)n"{}});}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ N\ (\#\ of\ substrings)\ \ =\ \%d\(\backslash\)n"{}},\ N);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ M\ (Substring\ Length)\ =\ \%d\(\backslash\)n"{}},\ M);}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(c)\ Chi\string^2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ chi2);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ F\ R\ E\ Q\ U\ E\ N\ C\ Y\(\backslash\)n"{}});}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ K\ ==\ 3\ )\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\ \ <=1\ \ \ \ \ 2\ \ \ \ \ 3\ \ \ \ >=4\ \ \ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3]);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ K\ ==\ 5\ )\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t<=4\ \ 5\ \ 6\ \ 7\ \ 8\ \ >=9\ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3],\ nu[4],\ nu[5]);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t<=10\ \ 11\ \ 12\ \ 13\ \ 14\ \ 15\ >=16\ Chi\string^2\ \ \ \ \ \ Assignment"{}});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\(\backslash\)t\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \%3d\ \ \%3d\ "{}},\ nu[0],\ nu[1],\ nu[2],\ nu[3],\ nu[4],\ nu[5],\ nu[6]);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00169\ }
-\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(\textcolor{keywordtype}{int}\ m,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\ ==\ 0\ ||\ m\ ==\ -\/1)}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ numOfBlocks\ =\ n;}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ powLen\ =\ (int)std::pow(2,\ m\ +\ 1)\ -\/\ 1;}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ std::vector<unsigned\ int>\ P(powLen,\ 0);}
-\DoxyCodeLine{00178\ }
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numOfBlocks;\ i++)\ \{}
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 1;}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ m;\ j++)\ \{}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ (i\ +\ j)\ \%\ n;}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[global\_idx\ /\ 32]\ >>\ (global\_idx\ \%\ 32))\ \&\ 1;}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bit\ ==\ 0)}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ *=\ 2;}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (bit\ ==\ 1)}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 2\ *\ k\ +\ 1;}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ P[k\ -\/\ 1]++;}
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0.0;}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ (\textcolor{keywordtype}{int})std::pow(2,\ m)\ -\/\ 1;\ i\ <\ (int)std::pow(2,\ m\ +\ 1)\ -\/\ 1;\ i++)\ \{}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ std::pow(P[i],\ 2);}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ sum\ =\ (sum\ *\ std::pow(2,\ m)\ /\ (double)n)\ -\/\ (double)n;}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sum;}
-\DoxyCodeLine{00200\ \ \ \ \ \}}
-\DoxyCodeLine{00201\ }
-\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a7a5340edebf56ed29a3ced5322721530}{Serial}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample,\ \textcolor{keywordtype}{int}\ m\ =\ 5)\ \{}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ psim0,\ psim1,\ psim2,\ del1,\ del2;}
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ psim0\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m,\ n,\ sample);}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ psim1\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m\ -\/\ 1,\ n,\ sample);}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ psim2\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m\ -\/\ 2,\ n,\ sample);}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ del1\ =\ psim0\ -\/\ psim1;}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ del2\ =\ psim0\ -\/\ 2.0\ *\ psim1\ +\ psim2;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\%s\(\backslash\)t\(\backslash\)tChi\string^2\ =\ \%f\ (Crit:\ \%f)\(\backslash\)n\(\backslash\)n"{}},\ is\_success\ ?\ \textcolor{stringliteral}{"{}SUCCESS"{}}\ :\ \textcolor{stringliteral}{"{}FAILURE"{}},\ chi2,\ chi2\_crit);}
+\DoxyCodeLine{00171\ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(\textcolor{keywordtype}{int}\ m,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\ ==\ 0\ ||\ m\ ==\ -\/1)}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ numOfBlocks\ =\ n;}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ powLen\ =\ (int)std::pow(2,\ m\ +\ 1)\ -\/\ 1;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ std::vector<unsigned\ int>\ P(powLen,\ 0);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ numOfBlocks;\ i++)\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 1;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ m;\ j++)\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ (i\ +\ j)\ \%\ n;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[global\_idx\ /\ 32]\ >>\ (global\_idx\ \%\ 32))\ \&\ 1;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bit\ ==\ 0)}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ *=\ 2;}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (bit\ ==\ 1)}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 2\ *\ k\ +\ 1;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ P[k\ -\/\ 1]++;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0.0;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ (\textcolor{keywordtype}{int})std::pow(2,\ m)\ -\/\ 1;\ i\ <\ (int)std::pow(2,\ m\ +\ 1)\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ std::pow(P[i],\ 2);}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ sum\ =\ (sum\ *\ std::pow(2,\ m)\ /\ (double)n)\ -\/\ (double)n;}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sum;}
+\DoxyCodeLine{00203\ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a7a5340edebf56ed29a3ced5322721530}{Serial}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample,\ \textcolor{keywordtype}{int}\ m\ =\ 5)\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ psim0,\ psim1,\ psim2,\ del1,\ del2;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ psim0\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m,\ n,\ sample);}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ psim1\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m\ -\/\ 1,\ n,\ sample);}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ psim2\ =\ \doxymbox{\hyperlink{namespacetests_aefef070a344d3aa3823d2d1a6830fbe6}{psi2}}(m\ -\/\ 2,\ n,\ sample);}
 \DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ crit1\ =\ 32.000;\ \textcolor{comment}{//\ df\ =\ 16,\ alpha\ =\ 0.01}}
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ crit2\ =\ 20.090;\ \textcolor{comment}{//\ df\ =\ 8,\ alpha\ =\ 0.01}}
-\DoxyCodeLine{00218\ }
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
-\DoxyCodeLine{00220\ }
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ [NIST]\ SERIAL\ TEST\(\backslash\)n"{}};}
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (a)\ Block\ length\ \ \ \ (m)\ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (b)\ Sequence\ length\ (n)\ =\ "{}}\ <<\ n\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (c)\ Psi\_m\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim0\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (d)\ Psi\_m-\/1\ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (e)\ Psi\_m-\/2\ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (f)\ Del\_1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (g)\ Del\_2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00231\ }
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (del1\ >\ crit1)\ \{}
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tdel1\_stat\ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ crit1\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tdel1\_stat\ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00237\ }
-\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (del2\ >\ crit2)\ \{}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tdel2\_stat\ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ crit2\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n\(\backslash\)n"{}};}
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tdel2\_stat\ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00243\ \ \ \ \ \}}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a5f2ec9fd97bb585c10d969b945f7c1e5}{ApproximateEntropy}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample,\ \textcolor{keywordtype}{int}\ m\ =\ 5)\ \{}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ j,\ k,\ r,\ blockSize,\ seqLength,\ powLen,\ index;}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum,\ numOfBlocks,\ ApEn[2],\ apen,\ chi\_squared;}
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ seqLength\ =\ sample.size()\ *\ 32;}
-\DoxyCodeLine{00253\ }
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ [NIST]\ APPROXIMATE\ ENTROPY\ TEST\(\backslash\)n"{}};}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ COMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}};}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (a)\ m\ (block\ length)\ \ \ \ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00259\ }
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ r\ =\ 0;}
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (blockSize\ =\ m;\ blockSize\ <=\ m\ +\ 1;\ blockSize++)\ \{}
-\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (blockSize\ ==\ 0)\ \{}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ApEn[0]\ =\ 0.00;}
-\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r++;}
-\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ numOfBlocks\ =\ (double)seqLength;}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ powLen\ =\ (int)std::pow(2,\ blockSize\ +\ 1)\ -\/\ 1;}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<unsigned\ int>\ P(powLen,\ 0);}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ numOfBlocks;\ i++)\ \{}
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 1;}
-\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ blockSize;\ j++)\ \{}
-\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ <<=\ 1;}
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ (i\ +\ j)\ \%\ seqLength;}
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[global\_idx\ /\ 32]\ >>\ (global\_idx\ \%\ 32))\ \&\ 1;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ del1\ =\ psim0\ -\/\ psim1;}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ del2\ =\ psim0\ -\/\ 2.0\ *\ psim1\ +\ psim2;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ crit1\ =\ 32.000;\ \textcolor{comment}{//\ df\ =\ 16,\ alpha\ =\ 0.01}}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ crit2\ =\ 20.090;\ \textcolor{comment}{//\ df\ =\ 8,\ alpha\ =\ 0.01}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ [NIST]\ SERIAL\ TEST\(\backslash\)n"{}};}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (a)\ Block\ length\ \ \ \ (m)\ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (b)\ Sequence\ length\ (n)\ =\ "{}}\ <<\ n\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (c)\ Psi\_m\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim0\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (d)\ Psi\_m-\/1\ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (e)\ Psi\_m-\/2\ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ psim2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (f)\ Del\_1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (g)\ Del\_2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (del1\ >\ crit1)\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tdel1\_stat\ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ crit1\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tdel1\_stat\ =\ "{}}\ <<\ del1\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (del2\ >\ crit2)\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tdel2\_stat\ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ crit2\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tdel2\_stat\ =\ "{}}\ <<\ del2\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ \ \ \ \ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a5f2ec9fd97bb585c10d969b945f7c1e5}{ApproximateEntropy}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample,\ \textcolor{keywordtype}{int}\ m\ =\ 5)\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ j,\ k,\ r,\ blockSize,\ seqLength,\ powLen,\ index;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum,\ numOfBlocks,\ ApEn[2],\ apen,\ chi\_squared;}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ seqLength\ =\ sample.size()\ *\ 32;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ [NIST]\ APPROXIMATE\ ENTROPY\ TEST\(\backslash\)n"{}};}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ COMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}};}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (a)\ m\ (block\ length)\ \ \ \ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ r\ =\ 0;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (blockSize\ =\ m;\ blockSize\ <=\ m\ +\ 1;\ blockSize++)\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (blockSize\ ==\ 0)\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ApEn[0]\ =\ 0.00;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r++;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ numOfBlocks\ =\ (double)seqLength;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ powLen\ =\ (int)std::pow(2,\ blockSize\ +\ 1)\ -\/\ 1;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<unsigned\ int>\ P(powLen,\ 0);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ numOfBlocks;\ i++)\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ =\ 1;}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ blockSize;\ j++)\ \{}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k\ <<=\ 1;}
 \DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bit\ ==\ 1)}
-\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k++;}
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ P[k\ -\/\ 1]++;}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ =\ 0.0;}
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index\ =\ (int)std::pow(2,\ blockSize)\ -\/\ 1;}
-\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ (int)std::pow(2,\ blockSize);\ i++)\ \{}
-\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (P[index]\ >\ 0)}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ P[index]\ *\ std::log(P[index]\ /\ numOfBlocks);}
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index++;}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ /=\ numOfBlocks;}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ApEn[r]\ =\ sum;}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r++;}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ apen\ =\ ApEn[0]\ -\/\ ApEn[1];}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ chi\_squared\ =\ 2.0\ *\ seqLength\ *\ (std::log(2.0)\ -\/\ apen);}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ global\_idx\ =\ (i\ +\ j)\ \%\ seqLength;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[global\_idx\ /\ 32]\ >>\ (global\_idx\ \%\ 32))\ \&\ 1;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bit\ ==\ 1)}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ k++;}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ P[k\ -\/\ 1]++;}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ =\ 0.0;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index\ =\ (int)std::pow(2,\ blockSize)\ -\/\ 1;}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ (int)std::pow(2,\ blockSize);\ i++)\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (P[index]\ >\ 0)}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ P[index]\ *\ std::log(P[index]\ /\ numOfBlocks);}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index++;}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ /=\ numOfBlocks;}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ApEn[r]\ =\ sum;}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r++;}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\ =\ 53.486;\ }
-\DoxyCodeLine{00303\ }
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (b)\ n\ (sequence\ length)\ =\ "{}}\ <<\ seqLength\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (c)\ Chi\string^2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (d)\ Phi(m)\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ ApEn[0]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (e)\ Phi(m+1)\ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ ApEn[1]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (f)\ ApEn\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ apen\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (g)\ Log(2)\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ std::log(2.0)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00311\ }
-\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\ >\ (\textcolor{keywordtype}{int})(std::log(seqLength)\ /\ std::log(2.0)\ -\/\ 5))\ \{}
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ recommended\ =\ std::max(1,\ (\textcolor{keywordtype}{int})(std::log(seqLength)\ /\ std::log(2.0)\ -\/\ 5));}
-\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Note:\ The\ blockSize\ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\ exceeds\ recommended\ value\ of\ "{}}\ <<\ recommended\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Results\ are\ inaccurate!\(\backslash\)n"{}};}
-\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
-\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chi\_squared\ >\ chi2\_crit)\ \{}
-\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tchi2\_stat\ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ chi2\_crit\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n\(\backslash\)n"{}};}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tchi2\_stat\ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
-\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00324\ \ \ \ \ \}}
-\DoxyCodeLine{00325\ }
-\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_aac2c14db525372b6a0667b72102fdc94}{Frequency}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ i;}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ f,\ s\_obs,\ p\_value,\ sum,\ sqrt2\ =\ 1.41421356237309504880;}
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ apen\ =\ ApEn[0]\ -\/\ ApEn[1];}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ chi\_squared\ =\ 2.0\ *\ seqLength\ *\ (std::log(2.0)\ -\/\ apen);}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\ =\ 53.486;\ }
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (b)\ n\ (sequence\ length)\ =\ "{}}\ <<\ seqLength\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (c)\ Chi\string^2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (d)\ Phi(m)\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ ApEn[0]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (e)\ Phi(m+1)\ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ ApEn[1]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (f)\ ApEn\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ apen\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (g)\ Log(2)\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ "{}}\ <<\ std::log(2.0)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (m\ >\ (\textcolor{keywordtype}{int})(std::log(seqLength)\ /\ std::log(2.0)\ -\/\ 5))\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ recommended\ =\ std::max(1,\ (\textcolor{keywordtype}{int})(std::log(seqLength)\ /\ std::log(2.0)\ -\/\ 5));}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Note:\ The\ blockSize\ =\ "{}}\ <<\ m\ <<\ \textcolor{stringliteral}{"{}\ exceeds\ recommended\ value\ of\ "{}}\ <<\ recommended\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Results\ are\ inaccurate!\(\backslash\)n"{}};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chi\_squared\ >\ chi2\_crit)\ \{}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ FAILURE\(\backslash\)t\(\backslash\)tchi2\_stat\ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\ (Crit:\ "{}}\ <<\ chi2\_crit\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ SUCCESS\(\backslash\)t\(\backslash\)tchi2\_stat\ =\ "{}}\ <<\ chi\_squared\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00327\ \ \ \ \ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_aac2c14db525372b6a0667b72102fdc94}{Frequency}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ i;}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \ f,\ s\_obs,\ p\_value,\ sum,\ sqrt2\ =\ 1.41421356237309504880;}
 \DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ sum\ =\ 0.0;}
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<n;\ i++\ )\ \{}
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[i/32]\ >>\ (i\%32))\ \&\ 1;}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ 2\ *\ bit\ -\/\ 1;}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ s\_obs\ =\ std::fabs(sum)/std::sqrt(n);}
-\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ f\ =\ s\_obs/sqrt2;}
-\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ p\_value\ =\ std::erfc(f);}
-\DoxyCodeLine{00345\ }
-\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ FREQUENCY\ TEST\(\backslash\)n"{}});}
-\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
-\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ The\ nth\ partial\ sum\ =\ \%d\(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})sum);}
-\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ S\_n/n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ sum/n);}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size()\ *\ 32;}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ALPHA\ =\ 0.01;}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ sum\ =\ 0.0;}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ i=0;\ i<n;\ i++\ )\ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bit\ =\ (sample[i/32]\ >>\ (i\%32))\ \&\ 1;}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ 2\ *\ bit\ -\/\ 1;}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ s\_obs\ =\ std::fabs(sum)/std::sqrt(n);}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ f\ =\ s\_obs/sqrt2;}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ p\_value\ =\ std::erfc(f);}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t\(\backslash\)t\ \ \ \ \ \ FREQUENCY\ TEST\(\backslash\)n"{}});}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tCOMPUTATIONAL\ INFORMATION:\(\backslash\)n"{}});}
 \DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
-\DoxyCodeLine{00353\ }
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value\ <\ ALPHA\ ?\ \textcolor{stringliteral}{"{}FAILURE"{}}\ :\ \textcolor{stringliteral}{"{}SUCCESS"{}},\ p\_value);}
-\DoxyCodeLine{00355\ \ \ \ \ \}}
-\DoxyCodeLine{00356\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
-\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a5016fd83a9311d0d19af96b950ffb9bc}{runAllNistTests}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_aac2c14db525372b6a0667b72102fdc94}{Frequency}}(sample);}
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a2e02d7b0c51fb1e89e930e30d365d535}{Runs}}(sample);}
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_aeb013dcccbe56ea981cf819a0ff38159}{LongestRunOfOnes}}(sample);}
-\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a7a5340edebf56ed29a3ced5322721530}{Serial}}(sample);}
-\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a5f2ec9fd97bb585c10d969b945f7c1e5}{ApproximateEntropy}}(sample);}
-\DoxyCodeLine{00363\ \ \ \ \ \}}
-\DoxyCodeLine{00364\ \}}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(a)\ The\ nth\ partial\ sum\ =\ \%d\(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})sum);}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t(b)\ S\_n/n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \%f\(\backslash\)n"{}},\ sum/n);}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)tp\_value\ =\ \%f\(\backslash\)n\(\backslash\)n"{}},\ p\_value\ <\ ALPHA\ ?\ \textcolor{stringliteral}{"{}FAILURE"{}}\ :\ \textcolor{stringliteral}{"{}SUCCESS"{}},\ p\_value);}
+\DoxyCodeLine{00358\ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacetests_a5016fd83a9311d0d19af96b950ffb9bc}{runAllNistTests}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_aac2c14db525372b6a0667b72102fdc94}{Frequency}}(sample);}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a2e02d7b0c51fb1e89e930e30d365d535}{Runs}}(sample);}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_aeb013dcccbe56ea981cf819a0ff38159}{LongestRunOfOnes}}(sample);}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a7a5340edebf56ed29a3ced5322721530}{Serial}}(sample);}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a5f2ec9fd97bb585c10d969b945f7c1e5}{ApproximateEntropy}}(sample);}
+\DoxyCodeLine{00366\ \ \ \ \ \}}
+\DoxyCodeLine{00367\ \}}
 
 \end{DoxyCode}

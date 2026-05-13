@@ -9,9 +9,12 @@
 #include <string>
 #include "tests.hpp"
 
+/**
+ * Пространство со вспомогательными функциями
+ */
 namespace util {
     /**
-     * @brief Функция для проверки на равномерность
+     * Функция для проверки на равномерность
      */
     void chiSquareUniform(const std::vector<uint32_t>& sample) {
         int n = sample.size();
@@ -48,7 +51,7 @@ namespace util {
     }
 
     /**
-     * @brief Функция для проверки на случайность
+     * Функция для проверки на случайность
      */
     void chiSquareRandomness(const std::vector<uint32_t>& sample) {
         int n = sample.size();

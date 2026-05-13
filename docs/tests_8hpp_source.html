@@ -96,374 +96,374 @@ $(function(){initNavTree('tests_8hpp_source.html','',''); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="namespacetests.html">    7</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetests.html">tests</a> {</div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">   11</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">Runs</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keywordtype">int</span>     S, k;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <span class="keywordtype">double</span>  pi, V, erfc_arg, p_value;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        S = 0;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">for</span> ( k=0; k&lt;n; k++ )</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keywordflow">if</span> ( ((sample[k/32] &gt;&gt; (k%32)) &amp; 1) )</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                S++;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        pi = (double)S / (<span class="keywordtype">double</span>)n;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">if</span> ( std::fabs(pi - 0.5) &gt; (2.0 / std::sqrt(n)) ) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            printf(<span class="stringliteral">&quot;\t\t\t\tRUNS TEST\n&quot;</span>);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            printf(<span class="stringliteral">&quot;\t\tPI ESTIMATOR CRITERIA NOT MET! PI = %f\n&quot;</span>, pi);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            p_value = 0.0;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            printf(<span class="stringliteral">&quot;FAILURE\t\tp_value = %f\n\n&quot;</span>, p_value);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            V = 1;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">for</span> ( k=1; k&lt;n; k++ ) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="keywordtype">int</span> current_bit = (sample[k/32] &gt;&gt; (k%32)) &amp; 1;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="keywordtype">int</span> prev_bit = (sample[(k-1)/32] &gt;&gt; ((k-1)%32)) &amp; 1;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <span class="keywordflow">if</span> ( current_bit != prev_bit )</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                    V++;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            erfc_arg = std::fabs(V - 2.0 * n * pi * (1.0 - pi)) / (2.0 * pi * (1.0 - pi) * std::sqrt(2.0 * n));</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            p_value = std::erfc(erfc_arg);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            printf(<span class="stringliteral">&quot;\t\t\t\tRUNS TEST\n&quot;</span>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            printf(<span class="stringliteral">&quot;\t\t(a) Pi                        = %f\n&quot;</span>, pi);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            printf(<span class="stringliteral">&quot;\t\t(b) V_n_obs (Total # of runs) = %d\n&quot;</span>, (<span class="keywordtype">int</span>)V);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            printf(<span class="stringliteral">&quot;\t\t(c) V_n_obs - 2 n pi (1-pi)\n&quot;</span>);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            printf(<span class="stringliteral">&quot;\t\t    -----------------------   = %f\n&quot;</span>, erfc_arg);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            printf(<span class="stringliteral">&quot;\t\t      2 sqrt(2n) pi (1-pi)\n&quot;</span>);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">if</span> ( p_value &lt; 0.0 || p_value &gt; 1.0 )</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                printf(<span class="stringliteral">&quot;WARNING:  P_VALUE IS OUT OF RANGE.\n&quot;</span>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            printf(<span class="stringliteral">&quot;%s\t\tp_value = %f\n\n&quot;</span>, p_value &lt; ALPHA ? <span class="stringliteral">&quot;FAILURE&quot;</span> : <span class="stringliteral">&quot;SUCCESS&quot;</span>, p_value);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span></div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacetests.html">   10</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacetests.html">tests</a> {</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">   14</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">Runs</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordtype">int</span>     S, k;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">double</span>  pi, V, erfc_arg, p_value;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        S = 0;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">for</span> ( k=0; k&lt;n; k++ )</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            <span class="keywordflow">if</span> ( ((sample[k/32] &gt;&gt; (k%32)) &amp; 1) )</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                S++;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        pi = (double)S / (<span class="keywordtype">double</span>)n;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">if</span> ( std::fabs(pi - 0.5) &gt; (2.0 / std::sqrt(n)) ) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            printf(<span class="stringliteral">&quot;\t\t\t\tRUNS TEST\n&quot;</span>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            printf(<span class="stringliteral">&quot;\t\tPI ESTIMATOR CRITERIA NOT MET! PI = %f\n&quot;</span>, pi);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            p_value = 0.0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            printf(<span class="stringliteral">&quot;FAILURE\t\tp_value = %f\n\n&quot;</span>, p_value);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            V = 1;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keywordflow">for</span> ( k=1; k&lt;n; k++ ) {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keywordtype">int</span> current_bit = (sample[k/32] &gt;&gt; (k%32)) &amp; 1;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                <span class="keywordtype">int</span> prev_bit = (sample[(k-1)/32] &gt;&gt; ((k-1)%32)) &amp; 1;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                <span class="keywordflow">if</span> ( current_bit != prev_bit )</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                    V++;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            erfc_arg = std::fabs(V - 2.0 * n * pi * (1.0 - pi)) / (2.0 * pi * (1.0 - pi) * std::sqrt(2.0 * n));</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            p_value = std::erfc(erfc_arg);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            printf(<span class="stringliteral">&quot;\t\t\t\tRUNS TEST\n&quot;</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            printf(<span class="stringliteral">&quot;\t\t(a) Pi                        = %f\n&quot;</span>, pi);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            printf(<span class="stringliteral">&quot;\t\t(b) V_n_obs (Total # of runs) = %d\n&quot;</span>, (<span class="keywordtype">int</span>)V);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            printf(<span class="stringliteral">&quot;\t\t(c) V_n_obs - 2 n pi (1-pi)\n&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            printf(<span class="stringliteral">&quot;\t\t    -----------------------   = %f\n&quot;</span>, erfc_arg);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            printf(<span class="stringliteral">&quot;\t\t      2 sqrt(2n) pi (1-pi)\n&quot;</span>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            printf(<span class="stringliteral">&quot;\t\t------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">if</span> ( p_value &lt; 0.0 || p_value &gt; 1.0 )</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                printf(<span class="stringliteral">&quot;WARNING:  P_VALUE IS OUT OF RANGE.\n&quot;</span>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            printf(<span class="stringliteral">&quot;%s\t\tp_value = %f\n\n&quot;</span>, p_value &lt; ALPHA ? <span class="stringliteral">&quot;FAILURE&quot;</span> : <span class="stringliteral">&quot;SUCCESS&quot;</span>, p_value);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">   66</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">LongestRunOfOnes</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">double</span>          chi2, pi[7];</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">int</span>             run, v_n_obs, N, i, j, K, M, V[7];</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    nu[7] = { 0, 0, 0, 0, 0, 0, 0 };</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">if</span> ( n &lt; 128 ) {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            printf(<span class="stringliteral">&quot;\t\t\t  LONGEST RUNS OF ONES TEST\n&quot;</span>);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            printf(<span class="stringliteral">&quot;\t\t   n=%d is too short\n&quot;</span>, n);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">if</span> ( n &lt; 6272 ) {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            K = 3;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            M = 8;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            V[0] = 1; V[1] = 2; V[2] = 3; V[3] = 4;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            pi[0] = 0.21484375;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            pi[1] = 0.3671875;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            pi[2] = 0.23046875;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            pi[3] = 0.1875;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( n &lt; 750000 ) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            K = 5;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            M = 128;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            V[0] = 4; V[1] = 5; V[2] = 6; V[3] = 7; V[4] = 8; V[5] = 9;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            pi[0] = 0.1174035788;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            pi[1] = 0.242955959;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            pi[2] = 0.249363483;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            pi[3] = 0.17517706;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            pi[4] = 0.102701071;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            pi[5] = 0.112398847;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            K = 6;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            M = 10000;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                V[0] = 10; V[1] = 11; V[2] = 12; V[3] = 13; V[4] = 14; V[5] = 15; V[6] = 16;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            pi[0] = 0.0882;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            pi[1] = 0.2092;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            pi[2] = 0.2483;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            pi[3] = 0.1933;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            pi[4] = 0.1208;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            pi[5] = 0.0675;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            pi[6] = 0.0727;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        N = n/M;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">for</span> ( i=0; i&lt;N; i++ ) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            v_n_obs = 0;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            run = 0;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keywordflow">for</span> ( j=0; j&lt;M; j++ ) {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="keywordtype">int</span> global_idx = i*M+j;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="keywordflow">if</span> ( ((sample[global_idx/32] &gt;&gt; (global_idx%32)) &amp; 1) == 1 ) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                    run++;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    <span class="keywordflow">if</span> ( run &gt; v_n_obs )</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                        v_n_obs = run;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    run = 0;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <span class="keywordflow">if</span> ( v_n_obs &lt; V[0] )</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                nu[0]++;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">for</span> ( j=0; j&lt;=K; j++ ) {</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <span class="keywordflow">if</span> ( v_n_obs == V[j] )</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                    nu[j]++;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            }</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">if</span> ( v_n_obs &gt; V[K] )</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                nu[K]++;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        }</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        chi2 = 0.0;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">for</span> ( i=0; i&lt;=K; i++ )</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            chi2 += ((nu[i] - N * pi[i]) * (nu[i] - N * pi[i])) / (N * pi[i]);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordtype">double</span> chi2_crit = (K == 3) ? 11.345 : ((K == 5) ? 15.086 : 16.812);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordtype">int</span> is_success = (chi2 &lt;= chi2_crit);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">   69</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">LongestRunOfOnes</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">double</span>          chi2, pi[7];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">int</span>             run, v_n_obs, N, i, j, K, M, V[7];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    nu[7] = { 0, 0, 0, 0, 0, 0, 0 };</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">if</span> ( n &lt; 128 ) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            printf(<span class="stringliteral">&quot;\t\t\t  LONGEST RUNS OF ONES TEST\n&quot;</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            printf(<span class="stringliteral">&quot;\t\t   n=%d is too short\n&quot;</span>, n);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">if</span> ( n &lt; 6272 ) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            K = 3;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            M = 8;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            V[0] = 1; V[1] = 2; V[2] = 3; V[3] = 4;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            pi[0] = 0.21484375;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            pi[1] = 0.3671875;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            pi[2] = 0.23046875;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            pi[3] = 0.1875;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( n &lt; 750000 ) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            K = 5;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            M = 128;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            V[0] = 4; V[1] = 5; V[2] = 6; V[3] = 7; V[4] = 8; V[5] = 9;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            pi[0] = 0.1174035788;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            pi[1] = 0.242955959;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            pi[2] = 0.249363483;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            pi[3] = 0.17517706;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            pi[4] = 0.102701071;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            pi[5] = 0.112398847;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            K = 6;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            M = 10000;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                V[0] = 10; V[1] = 11; V[2] = 12; V[3] = 13; V[4] = 14; V[5] = 15; V[6] = 16;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            pi[0] = 0.0882;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            pi[1] = 0.2092;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            pi[2] = 0.2483;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            pi[3] = 0.1933;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            pi[4] = 0.1208;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            pi[5] = 0.0675;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            pi[6] = 0.0727;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        N = n/M;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">for</span> ( i=0; i&lt;N; i++ ) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            v_n_obs = 0;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            run = 0;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">for</span> ( j=0; j&lt;M; j++ ) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                <span class="keywordtype">int</span> global_idx = i*M+j;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keywordflow">if</span> ( ((sample[global_idx/32] &gt;&gt; (global_idx%32)) &amp; 1) == 1 ) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                    run++;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    <span class="keywordflow">if</span> ( run &gt; v_n_obs )</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                        v_n_obs = run;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    run = 0;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">if</span> ( v_n_obs &lt; V[0] )</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                nu[0]++;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="keywordflow">for</span> ( j=0; j&lt;=K; j++ ) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                <span class="keywordflow">if</span> ( v_n_obs == V[j] )</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                    nu[j]++;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">if</span> ( v_n_obs &gt; V[K] )</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                nu[K]++;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        chi2 = 0.0;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordflow">for</span> ( i=0; i&lt;=K; i++ )</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            chi2 += ((nu[i] - N * pi[i]) * (nu[i] - N * pi[i])) / (N * pi[i]);</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        printf(<span class="stringliteral">&quot;\t\t\t  LONGEST RUNS OF ONES TEST\n&quot;</span>);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        printf(<span class="stringliteral">&quot;\t\t(a) N (# of substrings)  = %d\n&quot;</span>, N);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        printf(<span class="stringliteral">&quot;\t\t(b) M (Substring Length) = %d\n&quot;</span>, M);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        printf(<span class="stringliteral">&quot;\t\t(c) Chi^2                = %f\n&quot;</span>, chi2);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        printf(<span class="stringliteral">&quot;\t\t      F R E Q U E N C Y\n&quot;</span>);</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">if</span> ( K == 3 ) {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            printf(<span class="stringliteral">&quot;\t\t  &lt;=1     2     3    &gt;=4   Chi^2      Assignment&quot;</span>);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3]);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( K == 5 ) {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            printf(<span class="stringliteral">&quot;\t\t&lt;=4  5  6  7  8  &gt;=9 Chi^2      Assignment&quot;</span>);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3], nu[4], nu[5]);</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        }</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            printf(<span class="stringliteral">&quot;\t\t&lt;=10  11  12  13  14  15 &gt;=16 Chi^2      Assignment&quot;</span>);</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3], nu[4], nu[5], nu[6]);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        }</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        printf(<span class="stringliteral">&quot;\n%s\t\tChi^2 = %f (Crit: %f)\n\n&quot;</span>, is_success ? <span class="stringliteral">&quot;SUCCESS&quot;</span> : <span class="stringliteral">&quot;FAILURE&quot;</span>, chi2, chi2_crit);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }</div>
-</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordtype">double</span> chi2_crit = (K == 3) ? 11.345 : ((K == 5) ? 15.086 : 16.812);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordtype">int</span> is_success = (chi2 &lt;= chi2_crit);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        printf(<span class="stringliteral">&quot;\t\t\t  LONGEST RUNS OF ONES TEST\n&quot;</span>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        printf(<span class="stringliteral">&quot;\t\t(a) N (# of substrings)  = %d\n&quot;</span>, N);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        printf(<span class="stringliteral">&quot;\t\t(b) M (Substring Length) = %d\n&quot;</span>, M);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        printf(<span class="stringliteral">&quot;\t\t(c) Chi^2                = %f\n&quot;</span>, chi2);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        printf(<span class="stringliteral">&quot;\t\t      F R E Q U E N C Y\n&quot;</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">if</span> ( K == 3 ) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            printf(<span class="stringliteral">&quot;\t\t  &lt;=1     2     3    &gt;=4   Chi^2      Assignment&quot;</span>);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3]);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( K == 5 ) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            printf(<span class="stringliteral">&quot;\t\t&lt;=4  5  6  7  8  &gt;=9 Chi^2      Assignment&quot;</span>);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3], nu[4], nu[5]);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            printf(<span class="stringliteral">&quot;\t\t&lt;=10  11  12  13  14  15 &gt;=16 Chi^2      Assignment&quot;</span>);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            printf(<span class="stringliteral">&quot;\n\t\t %3d %3d %3d %3d %3d %3d  %3d &quot;</span>, nu[0], nu[1], nu[2], nu[3], nu[4], nu[5], nu[6]);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">  170</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(<span class="keywordtype">int</span> m, <span class="keywordtype">int</span> n, <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordflow">if</span> (m == 0 || m == -1)</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keywordflow">return</span> 0.0;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordtype">double</span> numOfBlocks = n;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordtype">int</span> powLen = (int)std::pow(2, m + 1) - 1;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        std::vector&lt;unsigned int&gt; P(powLen, 0);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numOfBlocks; i++) {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            <span class="keywordtype">int</span> k = 1;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m; j++) {</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <span class="keywordtype">int</span> global_idx = (i + j) % n;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                <span class="keywordtype">int</span> bit = (sample[global_idx / 32] &gt;&gt; (global_idx % 32)) &amp; 1;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                <span class="keywordflow">if</span> (bit == 0)</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                    k *= 2;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bit == 1)</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                    k = 2 * k + 1;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            }</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            P[k - 1]++;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        }</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordtype">double</span> sum = 0.0;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = (<span class="keywordtype">int</span>)std::pow(2, m) - 1; i &lt; (int)std::pow(2, m + 1) - 1; i++) {</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            sum += std::pow(P[i], 2);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        }</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        sum = (sum * std::pow(2, m) / (double)n) - (double)n;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">return</span> sum;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        printf(<span class="stringliteral">&quot;\n%s\t\tChi^2 = %f (Crit: %f)\n\n&quot;</span>, is_success ? <span class="stringliteral">&quot;SUCCESS&quot;</span> : <span class="stringliteral">&quot;FAILURE&quot;</span>, chi2, chi2_crit);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
 </div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span></div>
-<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">  205</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">Serial</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample, <span class="keywordtype">int</span> m = 5) {</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordtype">double</span> psim0, psim1, psim2, del1, del2;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        psim0 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m, n, sample);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        psim1 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m - 1, n, sample);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        psim2 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m - 2, n, sample);</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        del1 = psim0 - psim1;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        del2 = psim0 - 2.0 * psim1 + psim2;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="foldopen" id="foldopen00173" data-start="{" data-end="}">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">  173</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(<span class="keywordtype">int</span> m, <span class="keywordtype">int</span> n, <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">if</span> (m == 0 || m == -1)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordtype">double</span> numOfBlocks = n;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordtype">int</span> powLen = (int)std::pow(2, m + 1) - 1;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        std::vector&lt;unsigned int&gt; P(powLen, 0);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numOfBlocks; i++) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keywordtype">int</span> k = 1;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; m; j++) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                <span class="keywordtype">int</span> global_idx = (i + j) % n;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                <span class="keywordtype">int</span> bit = (sample[global_idx / 32] &gt;&gt; (global_idx % 32)) &amp; 1;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                <span class="keywordflow">if</span> (bit == 0)</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                    k *= 2;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bit == 1)</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                    k = 2 * k + 1;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            P[k - 1]++;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordtype">double</span> sum = 0.0;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = (<span class="keywordtype">int</span>)std::pow(2, m) - 1; i &lt; (int)std::pow(2, m + 1) - 1; i++) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            sum += std::pow(P[i], 2);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        sum = (sum * std::pow(2, m) / (double)n) - (double)n;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">return</span> sum;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span></div>
+<div class="foldopen" id="foldopen00208" data-start="{" data-end="}">
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">  208</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">Serial</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample, <span class="keywordtype">int</span> m = 5) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordtype">double</span> psim0, psim1, psim2, del1, del2;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        psim0 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m, n, sample);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        psim1 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m - 1, n, sample);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        psim2 = <a class="code hl_function" href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">psi2</a>(m - 2, n, sample);</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordtype">double</span> crit1 = 32.000; <span class="comment">// df = 16, alpha = 0.01</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordtype">double</span> crit2 = 20.090; <span class="comment">// df = 8, alpha = 0.01</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;  [NIST] SERIAL TEST\n&quot;</span>;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    ---------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (a) Block length    (m) = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (b) Sequence length (n) = &quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (c) Psi_m               = &quot;</span> &lt;&lt; psim0 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (d) Psi_m-1             = &quot;</span> &lt;&lt; psim1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (e) Psi_m-2             = &quot;</span> &lt;&lt; psim2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (f) Del_1               = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (g) Del_2               = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    ---------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">if</span> (del1 &gt; crit1) {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tdel1_stat = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; crit1 &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tdel1_stat = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordflow">if</span> (del2 &gt; crit2) {</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tdel2_stat = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; crit2 &lt;&lt; <span class="stringliteral">&quot;)\n\n&quot;</span>;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tdel2_stat = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        }</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        del1 = psim0 - psim1;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        del2 = psim0 - 2.0 * psim1 + psim2;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordtype">double</span> crit1 = 32.000; <span class="comment">// df = 16, alpha = 0.01</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordtype">double</span> crit2 = 20.090; <span class="comment">// df = 8, alpha = 0.01</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;  [NIST] SERIAL TEST\n&quot;</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    ---------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (a) Block length    (m) = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (b) Sequence length (n) = &quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (c) Psi_m               = &quot;</span> &lt;&lt; psim0 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (d) Psi_m-1             = &quot;</span> &lt;&lt; psim1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (e) Psi_m-2             = &quot;</span> &lt;&lt; psim2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (f) Del_1               = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (g) Del_2               = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    ---------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">if</span> (del1 &gt; crit1) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tdel1_stat = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; crit1 &lt;&lt; <span class="stringliteral">&quot;)\n&quot;</span>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tdel1_stat = &quot;</span> &lt;&lt; del1 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">if</span> (del2 &gt; crit2) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tdel2_stat = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; crit2 &lt;&lt; <span class="stringliteral">&quot;)\n\n&quot;</span>;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tdel2_stat = &quot;</span> &lt;&lt; del2 &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        }</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
 </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span></div>
-<div class="foldopen" id="foldopen00248" data-start="{" data-end="}">
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">  248</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">ApproximateEntropy</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample, <span class="keywordtype">int</span> m = 5) {</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordtype">int</span> i, j, k, r, blockSize, seqLength, powLen, index;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="keywordtype">double</span> sum, numOfBlocks, ApEn[2], apen, chi_squared;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        seqLength = sample.size() * 32;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;  [NIST] APPROXIMATE ENTROPY TEST\n&quot;</span>;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    COMPUTATIONAL INFORMATION:\n&quot;</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (a) m (block length)    = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        r = 0;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        </div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">for</span> (blockSize = m; blockSize &lt;= m + 1; blockSize++) {</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            <span class="keywordflow">if</span> (blockSize == 0) {</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                ApEn[0] = 0.00;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                r++;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                numOfBlocks = (double)seqLength;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                powLen = (int)std::pow(2, blockSize + 1) - 1;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                std::vector&lt;unsigned int&gt; P(powLen, 0);</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                <span class="keywordflow">for</span> (i = 0; i &lt; numOfBlocks; i++) {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                    k = 1;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                    <span class="keywordflow">for</span> (j = 0; j &lt; blockSize; j++) {</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                        k &lt;&lt;= 1;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                        </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                        <span class="keywordtype">int</span> global_idx = (i + j) % seqLength;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                        <span class="keywordtype">int</span> bit = (sample[global_idx / 32] &gt;&gt; (global_idx % 32)) &amp; 1;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span></div>
+<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">  251</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">ApproximateEntropy</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample, <span class="keywordtype">int</span> m = 5) {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keywordtype">int</span> i, j, k, r, blockSize, seqLength, powLen, index;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordtype">double</span> sum, numOfBlocks, ApEn[2], apen, chi_squared;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        seqLength = sample.size() * 32;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;  [NIST] APPROXIMATE ENTROPY TEST\n&quot;</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    COMPUTATIONAL INFORMATION:\n&quot;</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (a) m (block length)    = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        r = 0;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keywordflow">for</span> (blockSize = m; blockSize &lt;= m + 1; blockSize++) {</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">if</span> (blockSize == 0) {</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                ApEn[0] = 0.00;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                r++;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                numOfBlocks = (double)seqLength;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                powLen = (int)std::pow(2, blockSize + 1) - 1;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                </div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                std::vector&lt;unsigned int&gt; P(powLen, 0);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                <span class="keywordflow">for</span> (i = 0; i &lt; numOfBlocks; i++) {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                    k = 1;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                    <span class="keywordflow">for</span> (j = 0; j &lt; blockSize; j++) {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                        k &lt;&lt;= 1;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                        </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                        <span class="keywordflow">if</span> (bit == 1)</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                            k++;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                    }</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                    P[k - 1]++;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                }</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                sum = 0.0;</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                index = (int)std::pow(2, blockSize) - 1;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                <span class="keywordflow">for</span> (i = 0; i &lt; (int)std::pow(2, blockSize); i++) {</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                    <span class="keywordflow">if</span> (P[index] &gt; 0)</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                        sum += P[index] * std::log(P[index] / numOfBlocks);</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                    index++;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                }</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                sum /= numOfBlocks;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                ApEn[r] = sum;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                r++;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            }</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        }</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        apen = ApEn[0] - ApEn[1];</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        chi_squared = 2.0 * seqLength * (std::log(2.0) - apen);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                        <span class="keywordtype">int</span> global_idx = (i + j) % seqLength;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                        <span class="keywordtype">int</span> bit = (sample[global_idx / 32] &gt;&gt; (global_idx % 32)) &amp; 1;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                        </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                        <span class="keywordflow">if</span> (bit == 1)</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                            k++;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                    }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                    P[k - 1]++;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                sum = 0.0;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                index = (int)std::pow(2, blockSize) - 1;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                <span class="keywordflow">for</span> (i = 0; i &lt; (int)std::pow(2, blockSize); i++) {</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                    <span class="keywordflow">if</span> (P[index] &gt; 0)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                        sum += P[index] * std::log(P[index] / numOfBlocks);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                    index++;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                sum /= numOfBlocks;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>                ApEn[r] = sum;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                r++;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            }</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        }</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <span class="keywordtype">double</span> chi2_crit = 53.486; </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (b) n (sequence length) = &quot;</span> &lt;&lt; seqLength &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (c) Chi^2               = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (d) Phi(m)              = &quot;</span> &lt;&lt; ApEn[0] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (e) Phi(m+1)            = &quot;</span> &lt;&lt; ApEn[1] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (f) ApEn                = &quot;</span> &lt;&lt; apen &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (g) Log(2)              = &quot;</span> &lt;&lt; std::log(2.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="keywordflow">if</span> (m &gt; (<span class="keywordtype">int</span>)(std::log(seqLength) / std::log(2.0) - 5)) {</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            <span class="keywordtype">int</span> recommended = std::max(1, (<span class="keywordtype">int</span>)(std::log(seqLength) / std::log(2.0) - 5));</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    Note: The blockSize = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot; exceeds recommended value of &quot;</span> &lt;&lt; recommended &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    Results are inaccurate!\n&quot;</span>;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        }</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">if</span> (chi_squared &gt; chi2_crit) {</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tchi2_stat = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; chi2_crit &lt;&lt; <span class="stringliteral">&quot;)\n\n&quot;</span>;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tchi2_stat = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        }</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        apen = ApEn[0] - ApEn[1];</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        chi_squared = 2.0 * seqLength * (std::log(2.0) - apen);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <span class="keywordtype">double</span> chi2_crit = 53.486; </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (b) n (sequence length) = &quot;</span> &lt;&lt; seqLength &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (c) Chi^2               = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (d) Phi(m)              = &quot;</span> &lt;&lt; ApEn[0] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (e) Phi(m+1)            = &quot;</span> &lt;&lt; ApEn[1] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (f) ApEn                = &quot;</span> &lt;&lt; apen &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    (g) Log(2)              = &quot;</span> &lt;&lt; std::log(2.0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <span class="keywordflow">if</span> (m &gt; (<span class="keywordtype">int</span>)(std::log(seqLength) / std::log(2.0) - 5)) {</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            <span class="keywordtype">int</span> recommended = std::max(1, (<span class="keywordtype">int</span>)(std::log(seqLength) / std::log(2.0) - 5));</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    Note: The blockSize = &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot; exceeds recommended value of &quot;</span> &lt;&lt; recommended &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    Results are inaccurate!\n&quot;</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    --------------------------------------------\n&quot;</span>;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        }</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">if</span> (chi_squared &gt; chi2_crit) {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    FAILURE\t\tchi2_stat = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot; (Crit: &quot;</span> &lt;&lt; chi2_crit &lt;&lt; <span class="stringliteral">&quot;)\n\n&quot;</span>;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;    SUCCESS\t\tchi2_stat = &quot;</span> &lt;&lt; chi_squared &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        }</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    }</div>
 </div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span></div>
-<div class="foldopen" id="foldopen00329" data-start="{" data-end="}">
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno"><a class="line" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">  329</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">Frequency</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        <span class="keywordtype">int</span>     i;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keywordtype">double</span>  f, s_obs, p_value, sum, sqrt2 = 1.41421356237309504880;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span></div>
+<div class="foldopen" id="foldopen00332" data-start="{" data-end="}">
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">  332</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">Frequency</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keywordtype">int</span>     i;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordtype">double</span>  f, s_obs, p_value, sum, sqrt2 = 1.41421356237309504880;</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        sum = 0.0;</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">for</span> ( i=0; i&lt;n; i++ ) {</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            <span class="keywordtype">int</span> bit = (sample[i/32] &gt;&gt; (i%32)) &amp; 1;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            sum += 2 * bit - 1;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        }</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        </div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        s_obs = std::fabs(sum)/std::sqrt(n);</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        f = s_obs/sqrt2;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        p_value = std::erfc(f);</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        printf(<span class="stringliteral">&quot;\t\t\t      FREQUENCY TEST\n&quot;</span>);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        printf(<span class="stringliteral">&quot;\t\t(a) The nth partial sum = %d\n&quot;</span>, (<span class="keywordtype">int</span>)sum);</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        printf(<span class="stringliteral">&quot;\t\t(b) S_n/n               = %f\n&quot;</span>, sum/n);</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="keywordtype">int</span> n = sample.size() * 32;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keyword">const</span> <span class="keywordtype">double</span> ALPHA = 0.01;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        sum = 0.0;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordflow">for</span> ( i=0; i&lt;n; i++ ) {</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            <span class="keywordtype">int</span> bit = (sample[i/32] &gt;&gt; (i%32)) &amp; 1;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            sum += 2 * bit - 1;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        }</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        </div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        s_obs = std::fabs(sum)/std::sqrt(n);</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        f = s_obs/sqrt2;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        p_value = std::erfc(f);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        printf(<span class="stringliteral">&quot;\t\t\t      FREQUENCY TEST\n&quot;</span>);</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        printf(<span class="stringliteral">&quot;\t\tCOMPUTATIONAL INFORMATION:\n&quot;</span>);</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        printf(<span class="stringliteral">&quot;%s\t\tp_value = %f\n\n&quot;</span>, p_value &lt; ALPHA ? <span class="stringliteral">&quot;FAILURE&quot;</span> : <span class="stringliteral">&quot;SUCCESS&quot;</span>, p_value);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    }</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        printf(<span class="stringliteral">&quot;\t\t(a) The nth partial sum = %d\n&quot;</span>, (<span class="keywordtype">int</span>)sum);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        printf(<span class="stringliteral">&quot;\t\t(b) S_n/n               = %f\n&quot;</span>, sum/n);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        printf(<span class="stringliteral">&quot;\t\t---------------------------------------------\n&quot;</span>);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span> </div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        printf(<span class="stringliteral">&quot;%s\t\tp_value = %f\n\n&quot;</span>, p_value &lt; ALPHA ? <span class="stringliteral">&quot;FAILURE&quot;</span> : <span class="stringliteral">&quot;SUCCESS&quot;</span>, p_value);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    }</div>
 </div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="comment">/* ------------------- */</span></div>
-<div class="foldopen" id="foldopen00357" data-start="{" data-end="}">
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">  357</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">runAllNistTests</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <a class="code hl_function" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">Frequency</a>(sample);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <a class="code hl_function" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">Runs</a>(sample);</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <a class="code hl_function" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">LongestRunOfOnes</a>(sample);</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <a class="code hl_function" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">Serial</a>(sample);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <a class="code hl_function" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">ApproximateEntropy</a>(sample);</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    }</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    <span class="comment">/* ------------------- */</span></div>
+<div class="foldopen" id="foldopen00360" data-start="{" data-end="}">
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">  360</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">runAllNistTests</a>(<span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; sample) {</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <a class="code hl_function" href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">Frequency</a>(sample);</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <a class="code hl_function" href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">Runs</a>(sample);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        <a class="code hl_function" href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">LongestRunOfOnes</a>(sample);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <a class="code hl_function" href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">Serial</a>(sample);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <a class="code hl_function" href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">ApproximateEntropy</a>(sample);</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    }</div>
 </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>}</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
 </div>
-<div class="ttc" id="anamespacetests_html"><div class="ttname"><a href="namespacetests.html">tests</a></div><div class="ttdef"><b>Definition</b> tests.hpp:7</div></div>
-<div class="ttc" id="anamespacetests_html_a2e02d7b0c51fb1e89e930e30d365d535"><div class="ttname"><a href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">tests::Runs</a></div><div class="ttdeci">void Runs(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdoc">Runs Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:11</div></div>
-<div class="ttc" id="anamespacetests_html_a5016fd83a9311d0d19af96b950ffb9bc"><div class="ttname"><a href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">tests::runAllNistTests</a></div><div class="ttdeci">void runAllNistTests(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:357</div></div>
-<div class="ttc" id="anamespacetests_html_a5f2ec9fd97bb585c10d969b945f7c1e5"><div class="ttname"><a href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">tests::ApproximateEntropy</a></div><div class="ttdeci">void ApproximateEntropy(const std::vector&lt; uint32_t &gt; &amp;sample, int m=5)</div><div class="ttdoc">Approximate Entropy Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:248</div></div>
-<div class="ttc" id="anamespacetests_html_a7a5340edebf56ed29a3ced5322721530"><div class="ttname"><a href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">tests::Serial</a></div><div class="ttdeci">void Serial(const std::vector&lt; uint32_t &gt; &amp;sample, int m=5)</div><div class="ttdoc">Serial Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:205</div></div>
-<div class="ttc" id="anamespacetests_html_aac2c14db525372b6a0667b72102fdc94"><div class="ttname"><a href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">tests::Frequency</a></div><div class="ttdeci">void Frequency(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdoc">Frequency Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:329</div></div>
-<div class="ttc" id="anamespacetests_html_aeb013dcccbe56ea981cf819a0ff38159"><div class="ttname"><a href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">tests::LongestRunOfOnes</a></div><div class="ttdeci">void LongestRunOfOnes(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:66</div></div>
-<div class="ttc" id="anamespacetests_html_aefef070a344d3aa3823d2d1a6830fbe6"><div class="ttname"><a href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">tests::psi2</a></div><div class="ttdeci">double psi2(int m, int n, const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:170</div></div>
+<div class="ttc" id="anamespacetests_html"><div class="ttname"><a href="namespacetests.html">tests</a></div><div class="ttdef"><b>Definition</b> tests.hpp:10</div></div>
+<div class="ttc" id="anamespacetests_html_a2e02d7b0c51fb1e89e930e30d365d535"><div class="ttname"><a href="namespacetests.html#a2e02d7b0c51fb1e89e930e30d365d535">tests::Runs</a></div><div class="ttdeci">void Runs(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdoc">Runs Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:14</div></div>
+<div class="ttc" id="anamespacetests_html_a5016fd83a9311d0d19af96b950ffb9bc"><div class="ttname"><a href="namespacetests.html#a5016fd83a9311d0d19af96b950ffb9bc">tests::runAllNistTests</a></div><div class="ttdeci">void runAllNistTests(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:360</div></div>
+<div class="ttc" id="anamespacetests_html_a5f2ec9fd97bb585c10d969b945f7c1e5"><div class="ttname"><a href="namespacetests.html#a5f2ec9fd97bb585c10d969b945f7c1e5">tests::ApproximateEntropy</a></div><div class="ttdeci">void ApproximateEntropy(const std::vector&lt; uint32_t &gt; &amp;sample, int m=5)</div><div class="ttdoc">Approximate Entropy Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:251</div></div>
+<div class="ttc" id="anamespacetests_html_a7a5340edebf56ed29a3ced5322721530"><div class="ttname"><a href="namespacetests.html#a7a5340edebf56ed29a3ced5322721530">tests::Serial</a></div><div class="ttdeci">void Serial(const std::vector&lt; uint32_t &gt; &amp;sample, int m=5)</div><div class="ttdoc">Serial Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:208</div></div>
+<div class="ttc" id="anamespacetests_html_aac2c14db525372b6a0667b72102fdc94"><div class="ttname"><a href="namespacetests.html#aac2c14db525372b6a0667b72102fdc94">tests::Frequency</a></div><div class="ttdeci">void Frequency(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdoc">Frequency Test из NIST STS.</div><div class="ttdef"><b>Definition</b> tests.hpp:332</div></div>
+<div class="ttc" id="anamespacetests_html_aeb013dcccbe56ea981cf819a0ff38159"><div class="ttname"><a href="namespacetests.html#aeb013dcccbe56ea981cf819a0ff38159">tests::LongestRunOfOnes</a></div><div class="ttdeci">void LongestRunOfOnes(const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:69</div></div>
+<div class="ttc" id="anamespacetests_html_aefef070a344d3aa3823d2d1a6830fbe6"><div class="ttname"><a href="namespacetests.html#aefef070a344d3aa3823d2d1a6830fbe6">tests::psi2</a></div><div class="ttdeci">double psi2(int m, int n, const std::vector&lt; uint32_t &gt; &amp;sample)</div><div class="ttdef"><b>Definition</b> tests.hpp:173</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

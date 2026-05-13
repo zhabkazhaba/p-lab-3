@@ -4,6 +4,9 @@
 #include <cstdint>
 #include <cmath>
 
+/**
+ * Пространство с тестами NIST STS
+ */
 namespace tests {
     /**
      * @brief Runs Test из NIST STS
