@@ -1,0 +1,34 @@
+\doxysection{Quick\+BBS.\+hpp}
+\hypertarget{_quick_b_b_s_8hpp_source}{}\label{_quick_b_b_s_8hpp_source}\index{src/QuickBBS.hpp@{src/QuickBBS.hpp}}
+\doxymbox{\hyperlink{_quick_b_b_s_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_quick_b_b_s_a6b9d37377b36fee7b58e7b870a7d42ac}{QuickBBS}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ \ \ uint64\_t\ value;}
+\DoxyCodeLine{00010\ \ \ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ uint64\_t\ M\ =\ 564995933;\ \textcolor{comment}{//\ 22739\ *\ 24847}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{class_quick_b_b_s_a6b9d37377b36fee7b58e7b870a7d42ac}{QuickBBS}}(uint32\_t\ seed)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ value\ =\ seed\ \%\ M;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ ==\ 0\ ||\ value\ ==\ 1)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ 111;\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_quick_b_b_s_abbe29f5ff89ece91e9b003cee3eddd7a}{generate}}()\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ value\ =\ (value\ *\ value)\ \%\ M;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ uint32\_t\ output\ =\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(value);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ output\ =\ output\ \string^\ (output\ >>\ 13);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ output\ =\ output\ \string^\ (output\ <<\ 9);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ output;}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \};}
+
+\end{DoxyCode}

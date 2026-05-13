@@ -1,0 +1,145 @@
+\doxysection{util.\+hpp}
+\hypertarget{util_8hpp_source}{}\label{util_8hpp_source}\index{src/util.hpp@{src/util.hpp}}
+\doxymbox{\hyperlink{util_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{tests_8hpp}{tests.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespaceutil}{util}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespaceutil_a4e35282c63781a93e6d81eb32eeb456c}{chiSquareUniform}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size();}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ num\_bins\ =\ 10;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ std::vector<int>\ observed(num\_bins,\ 0);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ expected\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(n)\ /\ num\_bins;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ val\ :\ sample)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm\_val\ =\ val\ /\ 4294967296.0;\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bin\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(norm\_val\ *\ num\_bins);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bin\ >=\ num\_bins)\ bin\ =\ num\_bins\ -\/\ 1;\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ observed[bin]++;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_stat\ =\ 0.0;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ num\_bins;\ ++i)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ observed[i]\ -\/\ expected;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ chi2\_stat\ +=\ (diff\ *\ diff)\ /\ expected;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\_min\ =\ 3.325;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\_max\ =\ 16.919;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ |\ Хи-\/квадрат\ U:\ "{}}\ <<\ chi2\_stat;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chi2\_stat\ >\ chi2\_crit\_max)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Провал:\ разброс\ слишком\ велик)"{}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (chi2\_stat\ <\ chi2\_crit\_min)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Провал:\ разброс\ слишком\ мал)"{}};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Равномерно)"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespaceutil_a1dbce5814f6d70819df2ab1365039cda}{chiSquareRandomness}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ sample.size();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ k\ =\ 5;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ num\_cells\ =\ k\ *\ k;\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::vector<int>\ observed(num\_cells,\ 0);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pairs\_count\ =\ n\ /\ 2;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ expected\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(pairs\_count)\ /\ num\_cells;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n\ -\/\ 1;\ i\ +=\ 2)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm1\ =\ sample[i]\ /\ 4294967296.0;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ norm2\ =\ sample[i+1]\ /\ 4294967296.0;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bin1\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(norm1\ *\ k);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bin2\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(norm2\ *\ k);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bin1\ >=\ k)\ bin1\ =\ k\ -\/\ 1;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bin2\ >=\ k)\ bin2\ =\ k\ -\/\ 1;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ cell\_index\ =\ bin1\ *\ k\ +\ bin2;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ observed[cell\_index]++;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_stat\ =\ 0.0;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ num\_cells;\ ++i)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ observed[i]\ -\/\ expected;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ chi2\_stat\ +=\ (diff\ *\ diff)\ /\ expected;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\_min\ =\ 13.848;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ chi2\_crit\_max\ =\ 36.415;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ |\ Хи-\/квадрат\ R:\ "{}}\ <<\ chi2\_stat;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chi2\_stat\ >\ chi2\_crit\_max)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Провал:\ разброс\ слишком\ велик)\(\backslash\)n"{}};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (chi2\_stat\ <\ chi2\_crit\_min)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Провал:\ разброс\ слишком\ мал)\(\backslash\)n"{}};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (Случайно)\(\backslash\)n"{}};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespaceutil_adbece2707589ac0e62f4c7aa199f96a6}{printStats}}(\textcolor{keyword}{const}\ std::vector<uint32\_t>\&\ sample,\ \textcolor{keywordtype}{int}\ gen\_id,\ \textcolor{keywordtype}{int}\ sample\_id)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ uint64\_t\ sum\ =\ std::accumulate(sample.begin(),\ sample.end(),\ 0ULL);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(sum)\ /\ sample.size();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ variance\_sum\ =\ 0.0;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ val\ :\ sample)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ val\ -\/\ mean;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ variance\_sum\ +=\ diff\ *\ diff;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ stddev\ =\ std::sqrt(variance\_sum\ /\ sample.size());}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ cv\ =\ stddev\ /\ mean;}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Генератор:\ "{}}\ <<\ gen\_id\ <<\ \textcolor{stringliteral}{"{},\ Выборка:\ "{}}\ <<\ sample\_id\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ |\ Среднее:\ "{}}\ <<\ mean\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ |\ Отклонение:\ "{}}\ <<\ stddev\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ |\ Коэф.\ Ков.:\ "{}}\ <<\ cv;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceutil_a4e35282c63781a93e6d81eb32eeb456c}{util::chiSquareUniform}}(sample);\ \textcolor{comment}{//\ TODO(zhabka\_zhaba):\ проверить}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceutil_a1dbce5814f6d70819df2ab1365039cda}{util::chiSquareRandomness}}(sample);\ \textcolor{comment}{//\ TODO(zhabka\_zhaba):\ проверить}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacetests_a5016fd83a9311d0d19af96b950ffb9bc}{tests::runAllNistTests}}(sample);\ }
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespaceutil_afccd4f98588740a0262a88aef0c98a4f}{write\_csv}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\&\ sizes,\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\&\ times\_gen1,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\&\ times\_gen2,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\&\ times\_gen3,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\&\ times\_std)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ std::ofstream\ file(filename);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Ошибка:\ не\ удалось\ открыть\ файл\ "{}}\ <<\ filename\ <<\ \textcolor{stringliteral}{"{}\ для\ записи.\(\backslash\)n"{}};}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ file\ <<\ \textcolor{stringliteral}{"{}Size,CubeCG,LCGShuffle,QuickBBS,MT19937\(\backslash\)n"{}};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ sizes.size();\ ++i)\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ file\ <<\ sizes[i]\ <<\ \textcolor{stringliteral}{"{},"{}}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ times\_gen1[i]\ <<\ \textcolor{stringliteral}{"{},"{}}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ times\_gen2[i]\ <<\ \textcolor{stringliteral}{"{},"{}}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ times\_gen3[i]\ <<\ \textcolor{stringliteral}{"{},"{}}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ times\_std[i]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ file.close();}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Данные\ успешно\ сохранены\ в\ "{}}\ <<\ filename\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ \}}
+
+\end{DoxyCode}

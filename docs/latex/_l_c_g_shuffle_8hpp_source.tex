@@ -1,0 +1,30 @@
+\doxysection{LCGShuffle.\+hpp}
+\hypertarget{_l_c_g_shuffle_8hpp_source}{}\label{_l_c_g_shuffle_8hpp_source}\index{src/LCGShuffle.hpp@{src/LCGShuffle.hpp}}
+\doxymbox{\hyperlink{_l_c_g_shuffle_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_l_c_g_shuffle_aca3adcdec48817426461e6a51e921b80}{LCGShuffle}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ uint32\_t\ value;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ A\ =\ 874235315;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ C\ =\ 1321313;}
+\DoxyCodeLine{00013\ \ \ \ \ uint32\_t\ shuffle1\ =\ 9;}
+\DoxyCodeLine{00014\ \ \ \ \ uint32\_t\ shuffle2\ =\ 13;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \doxymbox{\hyperlink{class_l_c_g_shuffle_aca3adcdec48817426461e6a51e921b80}{LCGShuffle}}(uint32\_t\ seed)\ :\ value(seed)\ \{\};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{class_l_c_g_shuffle_ab564a8f2e630aaab83b4cabcd9754808}{generate}}()\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ value\ =\ A\ *\ value\ +\ C;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ uint32\_t\ output\ =\ value\ \string^\ (value\ >>\ shuffle1);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ output\ =\ output\ \string^\ (output\ <<\ shuffle2);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ output;}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \};}
+
+\end{DoxyCode}

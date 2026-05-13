@@ -1,0 +1,43 @@
+\doxysection{util Namespace Reference}
+\hypertarget{namespaceutil}{}\label{namespaceutil}\index{util@{util}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{namespaceutil_a4e35282c63781a93e6d81eb32eeb456c}{chi\+Square\+Uniform}} (const std::\+vector$<$ uint32\+\_\+t $>$ \&sample)
+\item 
+void \doxymbox{\hyperlink{namespaceutil_a1dbce5814f6d70819df2ab1365039cda}{chi\+Square\+Randomness}} (const std::\+vector$<$ uint32\+\_\+t $>$ \&sample)
+\item 
+void \doxymbox{\hyperlink{namespaceutil_adbece2707589ac0e62f4c7aa199f96a6}{print\+Stats}} (const std::\+vector$<$ uint32\+\_\+t $>$ \&sample, int gen\+\_\+id, int sample\+\_\+id)
+\item 
+void \doxymbox{\hyperlink{namespaceutil_afccd4f98588740a0262a88aef0c98a4f}{write\+\_\+csv}} (const std::\+string \&filename, const std::\+vector$<$ int $>$ \&sizes, const std::\+vector$<$ double $>$ \&times\+\_\+gen1, const std::\+vector$<$ double $>$ \&times\+\_\+gen2, const std::\+vector$<$ double $>$ \&times\+\_\+gen3, const std::\+vector$<$ double $>$ \&times\+\_\+std)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceutil_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceutil_a1dbce5814f6d70819df2ab1365039cda}\index{util@{util}!chiSquareRandomness@{chiSquareRandomness}}
+\index{chiSquareRandomness@{chiSquareRandomness}!util@{util}}
+\doxysubsubsection{\texorpdfstring{chiSquareRandomness()}{chiSquareRandomness()}}
+{\footnotesize\ttfamily \label{namespaceutil_a1dbce5814f6d70819df2ab1365039cda} 
+void util::\+chi\+Square\+Randomness (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ uint32\+\_\+t $>$ \&}]{sample}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceutil_a4e35282c63781a93e6d81eb32eeb456c}\index{util@{util}!chiSquareUniform@{chiSquareUniform}}
+\index{chiSquareUniform@{chiSquareUniform}!util@{util}}
+\doxysubsubsection{\texorpdfstring{chiSquareUniform()}{chiSquareUniform()}}
+{\footnotesize\ttfamily \label{namespaceutil_a4e35282c63781a93e6d81eb32eeb456c} 
+void util::\+chi\+Square\+Uniform (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ uint32\+\_\+t $>$ \&}]{sample}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceutil_adbece2707589ac0e62f4c7aa199f96a6}\index{util@{util}!printStats@{printStats}}
+\index{printStats@{printStats}!util@{util}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily \label{namespaceutil_adbece2707589ac0e62f4c7aa199f96a6} 
+void util::\+print\+Stats (\begin{DoxyParamCaption}\item[{const std::\+vector$<$ uint32\+\_\+t $>$ \&}]{sample}{, }\item[{int}]{gen\+\_\+id}{, }\item[{int}]{sample\+\_\+id}{}\end{DoxyParamCaption})}
+
+Функция, выводящая на экран информацию о выборке:\+ среднее, дисперсию, коэффициент ковариации; результаты проверки на равномерность и случайность; результаты проверки тестов NIST \Hypertarget{namespaceutil_afccd4f98588740a0262a88aef0c98a4f}\index{util@{util}!write\_csv@{write\_csv}}
+\index{write\_csv@{write\_csv}!util@{util}}
+\doxysubsubsection{\texorpdfstring{write\_csv()}{write\_csv()}}
+{\footnotesize\ttfamily \label{namespaceutil_afccd4f98588740a0262a88aef0c98a4f} 
+void util::\+write\+\_\+csv (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{filename}{, }\item[{const std::\+vector$<$ int $>$ \&}]{sizes}{, }\item[{const std::\+vector$<$ double $>$ \&}]{times\+\_\+gen1}{, }\item[{const std::\+vector$<$ double $>$ \&}]{times\+\_\+gen2}{, }\item[{const std::\+vector$<$ double $>$ \&}]{times\+\_\+gen3}{, }\item[{const std::\+vector$<$ double $>$ \&}]{times\+\_\+std}{}\end{DoxyParamCaption})}
+
+Функция для записи времен замеров в файл 
