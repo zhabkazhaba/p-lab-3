@@ -46,7 +46,7 @@ int main() {
     }
 
     seed = 54321;
-    std::vector<int> sizes = {1000, 5000, 10000, 50000, 100000, 250000, 500000, 1000000, 100000000};
+    std::vector<int> sizes = {1000, 5000, 10000, 50000, 100000, 250000, 500000, 750000, 1000000};
     std::vector<double> time1, time2, time3, time_std;
 
     for (int n : sizes) {
@@ -91,6 +91,6 @@ int main() {
         std::cout << "Создано: " << n << " элементов\n";
     }
 
-    util::write_csv("../data/out_times.csv", sizes, time1, time2, time3, time_std);
+    util::write_csv("../../data/out_times.csv", sizes, time1, time2, time3, time_std);
     return 0;
 }

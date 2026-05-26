@@ -19,5 +19,5 @@ plt.legend(fontsize=10)
 
 plt.tight_layout()
 
-plt.savefig("rando_plot.png", dpi=300)
+plt.savefig("../data/rando_plot.png", dpi=300)
 plt.show()
